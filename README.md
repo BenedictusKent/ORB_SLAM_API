@@ -8,6 +8,127 @@
 
 <details>
  <summary>
+    <code>GET</code> <code><b>/</b></code> <code>Get_Translation</code> <code>(Get camera translation.)</code>
+ </summary>
+
+##### Parameters
+
+> None
+
+##### Responses
+
+> | name      |  data type               | description       |
+> |-----------|--------------------------|-------------------|
+> | posc      |  Vector3                 | Camera translation.   |
+
+</details>
+
+<details>
+ <summary>
+    <code>GET</code> <code><b>/</b></code> <code>Get_Rotation</code> <code>(Get camera rotation.)</code>
+ </summary>
+
+##### Parameters
+
+> None
+
+##### Responses
+
+> | name      |  data type               | description       |
+> |-----------|--------------------------|-------------------|
+> | new_qc    |  Quaternion              | Camera rotation.   |
+
+</details>
+
+<details>
+ <summary>
+    <code>GET</code> <code><b>/</b></code> <code>Get_Plane_Position</code> <code>(Get plane position.)</code>
+ </summary>
+
+##### Parameters
+
+> None
+
+##### Responses
+
+> | name      |  data type               | description       |
+> |-----------|--------------------------|-------------------|
+> | posp      |  Vector3                 | Plane position.   |
+
+</details>
+
+<details>
+ <summary>
+    <code>GET</code> <code><b>/</b></code> <code>Get_Plane_Normal</code> <code>(Get plane normal.)</code>
+ </summary>
+
+##### Parameters
+
+> None
+
+##### Responses
+
+> | name      |  data type               | description       |
+> |-----------|--------------------------|-------------------|
+> | new_qp    |  Quaternion              | Plane normal.   |
+
+</details>
+
+<details>
+ <summary>
+    <code>GET</code> <code><b>/</b></code> <code>Get_Obj_Position</code> <code>(Get object position.)</code>
+ </summary>
+
+##### Parameters
+
+> None
+
+##### Responses
+
+> | name      |  data type               | description       |
+> |-----------|--------------------------|-------------------|
+> | obj_t     |  Vector3                 | Object position.   |
+
+</details>
+
+<details>
+ <summary>
+    <code>GET</code> <code><b>/</b></code> <code>Get_Obj_Normal</code> <code>(Get object normal.)</code>
+ </summary>
+
+##### Parameters
+
+> None
+
+##### Responses
+
+> | name      |  data type               | description       |
+> |-----------|--------------------------|-------------------|
+> | obj_r     |  Quaternion              | Object normal.   |
+
+</details>
+
+<details>
+ <summary>
+    <code>GET</code> <code><b>/</b></code> <code>Transform Plane</code> <code>(Get convex hull points.)</code>
+ </summary>
+
+##### Parameters
+
+> None
+
+##### Responses
+
+> | name      |  data type               | description       |
+> |-----------|--------------------------|-------------------|
+> | convex_points     |  Vector3[]              | Array of convex hull points.   |
+
+</details>
+
+------------------------------------------------------------------------------------------
+
+<details>
+ <summary>
     <code>POST</code> <code><b>/</b></code> <code>Initialize</code> <code>(Initialize ORB-SLAM2 system.)</code>
  </summary>
 
@@ -88,37 +209,65 @@ else
 
 <details>
  <summary>
-    <code>GET</code> <code><b>/</b></code> <code>Get_Translation</code> <code>(Get camera translation.)</code>
+    <code>POST</code> <code><b>/</b></code> <code>Calculate_Scale</code> <code>(Calculate map scale with a marker.)</code>
  </summary>
 
 ##### Parameters
 
 > None
 
-##### Responses
+
+##### Returns
 
 > | name      |  data type               | description       |
 > |-----------|--------------------------|-------------------|
-> | posc      |  Vector3                 | Camera translation.   |
+> | measure_scale    |  float                     | Scale of map based on a known marker.   |
 
 </details>
 
 <details>
  <summary>
-    <code>GET</code> <code><b>/</b></code> <code>Get_Rotation</code> <code>(Get camera rotation.)</code>
+    <code>POST</code> <code><b>/</b></code> <code>get_transform</code> <code>(Get matrix transformation and set object transformation.)</code>
  </summary>
 
 ##### Parameters
 
-> None
+> | name      |  type     | data type               | description       |
+> |-----------|-----------|-------------------------|-------------------|
+> | pos       |  required | Vector3                 | Position.         |
+> | rot       |  required | Quaternion              | Rotation.         |
+> | scale     |  required | Vector3                 | Map scale.        |
 
-##### Responses
+
+##### Returns
 
 > | name      |  data type               | description       |
 > |-----------|--------------------------|-------------------|
-> | new_qc    |  Quaternion              | Camera rotation.   |
+> | m         |  Matrix4x4               | Matrix based on known position, rotation, and scale.   |
 
 </details>
+
+<details>
+ <summary>
+    <code>POST</code> <code><b>/</b></code> <code>set_mr</code> <code>(Rotate matrix.)</code>
+ </summary>
+
+##### Parameters
+
+> | name      |  type     | data type               | description       |
+> |-----------|-----------|-------------------------|-------------------|
+> | angle     |  required | float                   | Angle in degrees. |
+
+
+##### Returns
+
+> | name      |  data type               | description       |
+> |-----------|--------------------------|-------------------|
+> | mr        |  Matrix4x4               | Rotated matrix.   |
+
+</details>
+
+------------------------------------------------------------------------------------------
 
 <details>
   <summary>
@@ -169,40 +318,6 @@ else
 </details>
 
 <details>
- <summary>
-    <code>GET</code> <code><b>/</b></code> <code>Get_Plane_Position</code> <code>(Get plane position.)</code>
- </summary>
-
-##### Parameters
-
-> None
-
-##### Responses
-
-> | name      |  data type               | description       |
-> |-----------|--------------------------|-------------------|
-> | posp      |  Vector3                 | Plane position.   |
-
-</details>
-
-<details>
- <summary>
-    <code>GET</code> <code><b>/</b></code> <code>Get_Plane_Normal</code> <code>(Get plane normal.)</code>
- </summary>
-
-##### Parameters
-
-> None
-
-##### Responses
-
-> | name      |  data type               | description       |
-> |-----------|--------------------------|-------------------|
-> | new_qp    |  Quaternion              | Plane normal.   |
-
-</details>
-
-<details>
   <summary>
     <code>PUT</code> <code><b>/</b></code> <code>SetTransform(pos, rot, scale)</code> <code>(Set matrix transformation.)</code>
   </summary>
@@ -227,117 +342,6 @@ else
 > | name      |  type     | data type               | description       |
 > |-----------|-----------|-------------------------|-------------------|
 > | temp      |  required | Matrix4x4               | Complete matrix.  |
-
-</details>
-
-<details>
- <summary>
-    <code>POST</code> <code><b>/</b></code> <code>Calculate_Scale</code> <code>(Calculate map scale with a marker.)</code>
- </summary>
-
-##### Parameters
-
-> None
-
-
-##### Returns
-
-> | name      |  data type               | description       |
-> |-----------|--------------------------|-------------------|
-> | measure_scale    |  float                     | Scale of map based on a known marker.   |
-
-</details>
-
-<details>
- <summary>
-    <code>POST</code> <code><b>/</b></code> <code>get_transform</code> <code>(Get matrix transformation and set object transformation.)</code>
- </summary>
-
-##### Parameters
-
-> | name      |  type     | data type               | description       |
-> |-----------|-----------|-------------------------|-------------------|
-> | pos       |  required | Vector3                 | Position.         |
-> | rot       |  required | Quaternion              | Rotation.         |
-> | scale     |  required | Vector3                 | Map scale.        |
-
-
-##### Returns
-
-> | name      |  data type               | description       |
-> |-----------|--------------------------|-------------------|
-> | m         |  Matrix4x4               | Matrix based on known position, rotation, and scale.   |
-
-</details>
-
-<details>
- <summary>
-    <code>GET</code> <code><b>/</b></code> <code>Get_Obj_Position</code> <code>(Get object position.)</code>
- </summary>
-
-##### Parameters
-
-> None
-
-##### Responses
-
-> | name      |  data type               | description       |
-> |-----------|--------------------------|-------------------|
-> | obj_t     |  Vector3                 | Object position.   |
-
-</details>
-
-<details>
- <summary>
-    <code>GET</code> <code><b>/</b></code> <code>Get_Obj_Normal</code> <code>(Get object normal.)</code>
- </summary>
-
-##### Parameters
-
-> None
-
-##### Responses
-
-> | name      |  data type               | description       |
-> |-----------|--------------------------|-------------------|
-> | obj_r     |  Quaternion              | Object normal.   |
-
-</details>
-
-<details>
- <summary>
-    <code>GET</code> <code><b>/</b></code> <code>Transform Plane</code> <code>(Get convex hull points.)</code>
- </summary>
-
-##### Parameters
-
-> None
-
-##### Responses
-
-> | name      |  data type               | description       |
-> |-----------|--------------------------|-------------------|
-> | convex_points     |  Vector3[]              | Array of convex hull points.   |
-
-</details>
-
-<details>
- <summary>
-    <code>POST</code> <code><b>/</b></code> <code>set_mr</code> <code>(Rotate matrix.)</code>
- </summary>
-
-##### Parameters
-
-> | name      |  type     | data type               | description       |
-> |-----------|-----------|-------------------------|-------------------|
-> | angle     |  required | float                   | Angle in degrees. |
-
-
-##### Returns
-
-> | name      |  data type               | description       |
-> |-----------|--------------------------|-------------------|
-> | mr        |  Matrix4x4               | Rotated matrix.   |
 
 </details>
 
