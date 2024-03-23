@@ -74,8 +74,8 @@
 > | name      |  type     | data type               | description       |
 > |-----------|-----------|-------------------------|-------------------|
 > | ImageData |  required | byte[]                  | Image data of the new frame.  |
-> | T         |  required | float[]                 | Float array placeholder to save translation matrix.   |
-> | wxyz      |  required | float[]                 | Float array placeholder to save rotation matrix.   |
+> | T         |  required | float[]                 | Float array placeholder to save translation matrix (3 x 1 matrix).   |
+> | wxyz      |  required | float[]                 | Float array placeholder to save rotation matrix (3 x 3 matrix).   |
 > | isFeature |  required | bool                    | Flag indicating whether to show feature points or not.   |
 > | rawdata   |  required | ref Color32[]           | Reference to an array to store the processed image data. |
 
