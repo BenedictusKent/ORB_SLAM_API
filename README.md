@@ -1,6 +1,8 @@
 ## ORB-SLAM2 API Documentation
 
 - Documentation of API used in tele-meeting application
+- ORB-SLAM2 Android project [here](https://drive.google.com/drive/folders/196pCvo0SFELr976olZ6-WwBLWGM9gNHP?usp=sharing).
+  - To edit ORB-SLAM2 functions for use in Unity, you can go to `SLAM_AR_Android-master\app\src\main\cpp\native-lib.cpp`
 
 ------------------------------------------------------------------------------------------
 
